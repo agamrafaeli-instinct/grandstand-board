@@ -1,0 +1,14 @@
+{
+  "title": "Grandstand board",
+  "owner": "agamrafaeli-instinct",
+  "ownerType": "user",
+  "project": 2,
+  "statusField": "Status",
+  "epicLabel": "epic",
+  "hideStatuses": ["Done"],
+  "needsMe": [],
+  "building": ["Ready", "Dev"],
+  "workRepo": "grandstand",
+  "workRunName": null,
+  "tiles": [["In dev", "Dev"], ["Ready", "Ready"], ["Defined", "Defined"]]
+}
