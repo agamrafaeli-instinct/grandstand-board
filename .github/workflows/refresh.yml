@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url || steps.deploy_retry.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
@@ -39,4 +39,12 @@ jobs:
         with:
           path: _site
       - id: deploy
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+      # GitHub sometimes reports "no artifact found" right after the upload. Wait and try once more.
+      - name: Wait before the deploy retry
+        if: steps.deploy.outcome == 'failure'
+        run: sleep 30
+      - id: deploy_retry
+        if: steps.deploy.outcome == 'failure'
         uses: actions/deploy-pages@v4
